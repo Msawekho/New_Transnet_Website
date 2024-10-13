@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Track Shipment - Transnet</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add your CSS styles here */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            animation: slideImages 12s infinite;
+        }
+
+        .background-slideshow img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+            float: left;
+        }
+
+        @keyframes slideImages {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-25%);
+            }
+            75% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(-75%);
+            }
+        }
+
+        header {
+            background-color: #ff0000;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        form input[type="submit"] {
+            background-color: #ff0000;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="Images/ban03.png" alt="Background 2">
+        <img src="Images/ban07.png" alt="Background 3">
+        <img src="Images/ban10.png" alt="Background 4">
+        <img src="Images/29.png" alt="Background 1">
+    </div>
+    <header>
+        <h1>Track Shipment</h1>
+    </header>
+    <nav>
+        <a href="Add_Shipment.html">Add Shipment</a>
+        <a href="Edit_Shipment.html">Edit Shipment</a>
+        <a href="Track_Shipment.html">Track Shipment</a>
+    </nav>
+    <div class="container" style="background-color: #f0f0f0; color: #333;">
+        <h1>Track Shipment</h1>
+
+        <form onsubmit="trackShipment(); return false;">
+            <label for="shipment_id">Shipment ID:</label>
+            <input type="text" id="shipment_id" name="shipment_id" required>
+
+            <button type="submit">Track Shipment</button>
+        </form>
+        
+        <div id="shipmentInfo"></div>
+    </div>
+    <footer>
+        <p>Contact Transnet:</p>
+        <p>Phone: 0800 003 056</p>
+        <p>Email: reportit@ethicshelpdesk.com</p>
+        <p>Visit us at <a href="https://www.transnet.net/Pages/Home.aspx">www.transnet.com</a></p>
+        <p>&copy; 2023 Transnet. All rights reserved.</p>
+    </footer>
+
+    <script>
+    function trackShipment() {
+        const shipmentId = document.getElementById('shipment_id').value;
+
+        // Check if shipment ID exists in localStorage
+        const addShipments = JSON.parse(localStorage.getItem('addShipments')) || [];
+        const editShipments = JSON.parse(localStorage.getItem('editShipments')) || [];
+
+        const foundAddShipment = addShipments.find(shipment => shipment.id === shipmentId);
+        const foundEditShipment = editShipments.find(shipment => shipment.id === shipmentId);
+
+        let shipmentInfo = "";
+
+        if (foundAddShipment) {
+            shipmentInfo = `<h2>Shipment Details</h2>
+                            <p><strong>Shipment ID:</strong> ${foundAddShipment.id}</p>
+                            <p><strong>Destination:</strong> ${foundAddShipment.destination}</p>
+                            <p><strong>Weight:</strong> ${foundAddShipment.weight} kg</p>
+                            <p><strong>Shipment Date:</strong> ${foundAddShipment.shipmentDate}</p>
+                            <p><strong>Arrival Date:</strong> ${foundAddShipment.arrivalDate}</p>`;
+        } else if (foundEditShipment) {
+            shipmentInfo = `<h2>Shipment Details</h2>
+                            <p><strong>Shipment ID:</strong> ${foundEditShipment.id}</p>
+                            <p><strong>New Destination:</strong> ${foundEditShipment.newDestination}</p>
+                            <p><strong>New Weight:</strong> ${foundEditShipment.newWeight} kg</p>
+                            <p><strong>Shipment Date:</strong> ${foundEditShipment.shipmentDate}</p>
+                            <p><strong>New Arrival Date:</strong> ${foundEditShipment.newArrivalDate}</p>`;
+        } else {
+            // Populate random information with the same layout
+            const randomShipmentId = generateRandomId();
+            const randomDestination = generateRandomDestination();
+            const randomWeight = generateRandomWeight();
+            const randomShipmentDate = generateRandomDate();
+            const randomArrivalDate = generateRandomDate();
+
+            shipmentInfo = `<h2>Shipment Details</h2>
+                            <p><strong>Shipment ID:</strong> ${randomShipmentId}</p>
+                            <p><strong>Destination:</strong> ${randomDestination}</p>
+                            <p><strong>Weight:</strong> ${randomWeight} kg</p>
+                            <p><strong>Shipment Date:</strong> ${randomShipmentDate}</p>
+                            <p><strong>Arrival Date:</strong> ${randomArrivalDate}</p>`;
+        }
+
+        document.getElementById('shipmentInfo').innerHTML = shipmentInfo;
+    }
+
+    function generateRandomId() {
+    const prefix = 'SHIP_';
+    const timestamp = new Date().getTime();
+    const randomDigits = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    return `${prefix}${timestamp}${randomDigits}`;
+}
+
+    function generateRandomDestination() {
+        // Implement your logic to generate a random destination
+        const destinations = ['City A', 'City B', 'City C'];
+        return destinations[Math.floor(Math.random() * destinations.length)];
+    }
+
+    function generateRandomWeight() {
+        // Implement your logic to generate a random weight
+        return Math.floor(Math.random() * 100);
+    }
+
+    function generateRandomDate() {
+        // Implement your logic to generate a random date
+        const year = new Date().getFullYear();
+        const month = Math.floor(Math.random() * 12) + 1;
+        const day = Math.floor(Math.random() * 28) + 1; // Assume all months have 28 days for simplicity
+        return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transnet - Logistics Solutions</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            animation: slideImages 12s infinite;
+        }
+
+        .background-slideshow img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+            float: left;
+        }
+
+        @keyframes slideImages {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-25%);
+            }
+            75% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(-75%);
+            }
+        }
+
+        header {
+            background-color: #ff0000;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .login-nav {
+            background-color: #333;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .login-nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        .login-nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            color: #333;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="Images/ban03.png" alt="Background 2">
+        <img src="Images/ban07.png" alt="Background 3">
+        <img src="Images/ban10.png" alt="Background 4">
+        <img src="Images/29.png" alt="Background 1">
+    </div>
+
+    <header>
+        <h1>Welcome to Transnet - Logistics Solutions</h1>
+        <h2>What would you like to do ?</h2>
+    </header>
+
+    <div class="login-nav">
+        <a href="Transnet.html">Visit Our Webesite</a>
+        <a href="Landing.html">Add Shipments</a>
+    </div>
+
+    <main>
+        <section id="about">
+            <h2>About Transnet</h2>
+            <p>Transnet is a leading logistics and transportation company, dedicated to connecting people, goods, and businesses around the world...</p>
+            <!-- Add more about information here -->
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <p>Our services include:</p>
+            <ul>
+                <li>Port Operations</li>
+                <li>Rail Freight</li>
+                <li>Shipping</li>
+                <li>Logistics Solutions</li>
+            </ul>
+            <!-- Add more service details here -->
+        </section>
+
+        <section id="contact">
+            <h2>Contact Transnet</h2>
+            <p>Have questions or want to get in touch? Use the contact form below:</p>
+            <form>
+                <!-- Add a contact form here -->
+            </form>
+        </section>
+
+        <section id="join">
+            <h2>Join Transnet's Community</h2>
+            <p>Explore the world of logistics with Transnet. Join our community and stay updated on the latest news and developments.</p>
+            <!-- Add more join information here -->
+        </section>
+    </main>
+
+    <footer>
+        <p>Contact Transnet:</p>
+        <p>Phone: 0800 003 056</p>
+        <p>Email: reportit@ethicshelpdesk.com</p>
+        <p>Visit us at <a href="https://www.transnet.net/Pages/Home.aspx">www.transnet.com</a></p>
+        <p>&copy; 2023 Transnet. All rights reserved.</p>
+    </footer>
+</body>
+</html>

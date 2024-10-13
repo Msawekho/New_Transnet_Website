@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Shipment - Transnet</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add your CSS styles here */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            animation: slideImages 12s infinite;
+        }
+
+        .background-slideshow img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+            float: left;
+        }
+
+        @keyframes slideImages {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-25%);
+            }
+            75% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(-75%);
+            }
+        }
+
+        header {
+            background-color: #ff0000;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        form input[type="submit"] {
+            background-color: #ff0000;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="Images/ban03.png" alt="Background 2">
+        <img src="Images/ban07.png" alt="Background 3">
+        <img src="Images/ban10.png" alt="Background 4">
+        <img src="Images/29.png" alt="Background 1">
+    </div>
+
+    <header>
+        <h1>Edit Shipment</h1>
+    </header>
+
+    <nav>
+        <a href="Add_Shipment.html">Add Shipment</a>
+        <a href="Edit_Shipment.html">Edit Shipment</a>
+        <a href="Track_Shipment.html">Track Shipment</a>
+    </nav>
+
+    <div class="container" style="background-color: #f0f0f0; color: #333;">
+        <h1>Edit Shipment</h1>
+
+        <form onsubmit="submitForm(); return false;">
+    <label for="shipment_id">Shipment ID:</label>
+    <input type="text" id="shipment_id" name="shipment_id" required>
+
+    <label for="destination">New Destination:</label>
+    <input type="text" id="destination" name="destination" required>
+
+    <label for="new_weight">New Weight (kg):</label>
+    <input type="number" id="new_weight" name="new_weight" required>
+
+    <!-- Add shipment_date input -->
+    <label for="shipment_date">Shipment Date:</label>
+    <input type="date" id="shipment_date" name="shipment_date" required>
+
+    <button type="submit">Edit Shipment</button>
+</form>
+    </div>
+    
+    <script src="common.js"></script>
+    <!-- ... (previous HTML code) ... -->
+
+<script src="common.js"></script>
+<script>
+    window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const shipmentIdParam = urlParams.get('shipment_id');
+        const shipmentIdInput = document.getElementById('shipment_id');
+        shipmentIdInput.value = shipmentIdParam;
+
+        // Set a default shipment date based on the new weight
+        const weightInput = document.getElementById('new_weight');
+        const shipmentDateInput = document.getElementById('shipment_date');
+        setDefaultShipmentDate(weightInput.value, shipmentDateInput);
+    };
+
+    async function validateDestination(destination) {
+        const apiKey = 'YOUR_API_KEY'; // Replace with your actual OpenCage Geocoding API key
+        const apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(destination)}&key=${apiKey}`;
+
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+
+            if (data.results && data.results.length > 0) {
+                // Valid destination
+                return true;
+            } else {
+                // Invalid destination
+                return false;
+            }
+        } catch (error) {
+            console.error('Error validating destination:', error);
+            // Assume it's valid to avoid blocking the form submission
+            return true;
+        }
+    }
+
+    function submitForm() {
+        const destinationInput = document.getElementById('destination');
+        const destination = destinationInput.value.trim();
+
+        if (destination === "") {
+            alert("Please enter a valid destination.");
+            return;
+        }
+
+        const weightInput = document.getElementById('new_weight');
+        const weight = parseFloat(weightInput.value);
+
+        if (isNaN(weight) || weight <= 0 || weight > 24000) {
+            alert("Please enter a valid weight between 1 and 24000 kg.");
+            return;
+        }
+
+        // Validate destination using the OpenCage Geocoding API
+        validateDestination(destination)
+            .then(isValidDestination => {
+                if (!isValidDestination) {
+                    alert("Please enter a valid Earth location as the destination.");
+                } else {
+                    // Continue with the existing form submission logic
+                    const shipmentDateInput = document.getElementById('shipment_date');
+                    const currentDate = new Date();
+                    const selectedDate = new Date(shipmentDateInput.value);
+
+                    if (selectedDate < currentDate) {
+                        alert("Please select a future date because the shipment starts the day after you edited the shipment.");
+                        return;
+                    }
+
+                    // Calculate arrival date
+                    const arrivalDate = new Date(selectedDate);
+                    let daysToAdd;
+
+                    if (weight >= 1 && weight <= 1000) {
+                        daysToAdd = getRandomInt(4, 10);
+                    } else if (weight >= 1001) {
+                        daysToAdd = getRandomInt(10, 16);
+                    }
+
+                    arrivalDate.setDate(selectedDate.getDate() + daysToAdd);
+
+                    const formattedArrivalDate = formatDate(arrivalDate);
+
+                    // Display pop-up message with recalculated shipment details
+                    alert("Shipment successfully edited!\nShipment ID: " + document.getElementById('shipment_id').value +
+                        "\nNew Destination: " + destination +
+                        "\nNew Weight: " + weight +
+                        "\nShipment Date: " + document.getElementById('shipment_date').value +
+                        "\nNew Estimated Arrival Date: " + formattedArrivalDate);
+                }
+            })
+            .catch(error => {
+                console.error('Error validating destination:', error);
+                // Assume it's valid to avoid blocking the form submission
+                // Continue with the existing form submission logic
+            });
+    }
+</script>
+
+    <footer>
+        <p>Contact Transnet:</p>
+        <p>Phone: 0800 003 056</p>
+        <p>Email: reportit@ethicshelpdesk.com</p>
+        <p>Visit us at <a href="https://www.transnet.net/Pages/Home.aspx">www.transnet.com</a></p>
+        <p>&copy; 2023 Transnet. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

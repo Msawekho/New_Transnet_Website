@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Transnet</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            animation: slideImages 12s infinite;
+        }
+
+        .background-slideshow img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+            float: left;
+        }
+
+        @keyframes slideImages {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-25%);
+            }
+            75% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(-75%);
+            }
+        }
+
+        header {
+            background-color: #ff0000;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="Images/ban03.png" alt="Background 2">
+        <img src="Images/ban07.png" alt="Background 3">
+        <img src="Images/ban10.png" alt="Background 4">
+        <img src="Images/29.png" alt="Background 1">
+    </div>
+
+    <header>
+        <h1>Our Services</h1>
+        <nav>
+        <a href="index.html">Home</a>
+        <a href="About_Us.html">About Us</a>
+        <a href="Our_Services.html">Our Services</a>
+        <a href="Contact_Us.html">Contact Us</a>
+        <a href="Join_Us.html">Join Us</a>
+    </nav>
+    </header>
+    <main>
+        <section class="service" style="background-color: #f0f0f0; color: #333;">
+            <h2>Port Operations</h2>
+            <p>We offer comprehensive port operations, ensuring the efficient handling of cargo and goods at our world-class ports. Our state-of-the-art facilities and experienced team make us a leader in the industry.</p>
+        </section>
+        
+        <section class="service" style="background-color: #f0f0f0; color: #333;">
+            <h2>Rail Freight</h2>
+            <p>Transnet's rail freight services are the backbone of our transportation network. We provide reliable and cost-effective rail solutions, connecting businesses and communities across the country.</p>
+        </section>
+        
+        <section class="service" style="background-color: #f0f0f0; color: #333;">
+            <h2>Shipping</h2>
+            <p>Our shipping services cover both domestic and international routes. With a modern fleet and a commitment to safety and sustainability, we ensure that your cargo reaches its destination on time and intact.</p>
+        </section>
+        
+        <section class="service" style="background-color: #f0f0f0; color: #333;">
+            <h2>Logistics Solutions</h2>
+            <p>Transnet offers end-to-end logistics solutions tailored to your needs. From warehousing to distribution, we optimize your supply chain, saving you time and money while enhancing efficiency.</p>
+        </section>
+    </main>
+    <footer>
+        <p>Contact Transnet:</p>
+        <p>Phone: 0800 003 056</p>
+        <p>Email: reportit@ethicshelpdesk.com</p>
+        <p>Visit us at <a href="https://www.transnet.net/Pages/Home.aspx">www.transnet.com</a></p>
+        <p>&copy; 2023 Transnet. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+    </body>
+</html>

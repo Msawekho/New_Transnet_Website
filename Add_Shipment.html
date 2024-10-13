@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Shipment - Transnet</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add your CSS styles here */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            animation: slideImages 12s infinite;
+        }
+
+        .background-slideshow img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+            float: left;
+        }
+
+        @keyframes slideImages {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-25%);
+            }
+            75% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(-75%);
+            }
+        }
+
+        header {
+            background-color: #ff0000;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        form input[type="submit"] {
+            background-color: #ff0000;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="Images/ban03.png" alt="Background 2">
+        <img src="Images/ban07.png" alt="Background 3">
+        <img src="Images/ban10.png" alt="Background 4">
+        <img src="Images/29.png" alt="Background 1">
+    </div>
+    <header>
+        <h1>Add Shipment</h1>
+    </header>
+    <nav>
+        <a href="Add_Shipment.html">Add Shipment</a>
+        <a href="Edit_Shipment.html">Edit Shipment</a>
+        <a href="Track_Shipment.html">Track Shipment</a>
+    </nav>
+    <div class="container" style="background-color: #f0f0f0; color: #333;">
+        <h1>Add Shipment</h1>
+
+        <form onsubmit="submitForm(); return false;">
+            <label for="shipment_id">Shipment ID:</label>
+            <input type="text" id="shipment_id" name="shipment_id" required>
+
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" required>
+
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" required>
+
+            <label for="shipment_date">Shipment Date:</label>
+            <input type="date" id="shipment_date" name="shipment_date" required>
+
+            <button type="submit">Add Shipment</button>
+        </form>
+    </div>
+    <script src="common.js"></script>
+    <script>
+    window.onload = function () {
+        const shipmentIdInput = document.getElementById('shipment_id');
+        let shipmentId = localStorage.getItem('lastShipmentId');
+
+        if (!shipmentId) {
+            shipmentId = generateShipmentId();
+            localStorage.setItem('lastShipmentId', shipmentId);
+        }
+
+        shipmentIdInput.value = shipmentId;
+
+        // Set a default shipment date based on the weight
+        const weightInput = document.getElementById('weight');
+        const shipmentDateInput = document.getElementById('shipment_date');
+        setDefaultShipmentDate(weightInput.value, shipmentDateInput);
+    };
+
+    function generateShipmentId() {
+        return 'SHIP_' + Date.now();
+    }
+
+    function setDefaultShipmentDate(weight, shipmentDateInput) {
+        const currentDate = new Date();
+        let daysToAdd;
+
+        if (weight >= 1 && weight <= 1000) {
+            // For weights from 1kg to 1000kg, set arrival between 4-9 days
+            daysToAdd = getRandomInt(4, 10);
+        } else if (weight >= 1001) {
+            // For weights from 1001kg and above, set arrival between 10-15 days
+            daysToAdd = getRandomInt(10, 16);
+        }
+
+        currentDate.setDate(currentDate.getDate() + daysToAdd);
+        const formattedDate = formatDate(currentDate);
+        shipmentDateInput.value = formattedDate;
+    }
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    function submitForm() {
+        const shipmentDateInput = document.getElementById('shipment_date');
+        const currentDate = new Date();
+        const selectedDate = new Date(shipmentDateInput.value);
+
+        if (selectedDate < currentDate) {
+            alert("Please select a future date because the shipment starts the day after you add the shipment.");
+            return;
+            
+            
+        }
+
+        // Calculate arrival date
+        const arrivalDate = new Date(selectedDate);
+        arrivalDate.setDate(selectedDate.getDate() + 4); // Default 4 days for arrival
+
+        const weight = document.getElementById('weight').value;
+
+        if (weight >= 1001) {
+            arrivalDate.setDate(selectedDate.getDate() + 10); // For weights from 1001kg and above, set arrival between 10-15 days
+        }
+
+        const formattedArrivalDate = formatDate(arrivalDate);
+
+        // Display pop-up message with shipment details
+        alert("Shipment successfully added!\nShipment ID: " + document.getElementById('shipment_id').value +
+            "\nDestination: " + document.getElementById('destination').value +
+            "\nWeight: " + weight +
+            "\nShipment Date: " + document.getElementById('shipment_date').value +
+            "\nEstimated Arrival Date: " + formattedArrivalDate);
+    }
+</script>
+
+</body>
+
+<footer>
+    <p>Contact Transnet:</p>
+    <p>Phone: 0800 003 056</p>
+    <p>Email: reportit@ethicshelpdesk.com</p>
+    <p>Visit us at <a href="https://www.transnet.net/Pages/Home.aspx">www.transnet.com</a></p>
+    <p>&copy; 2023 Transnet. All rights reserved.</p>
+</footer>
+
+</html>

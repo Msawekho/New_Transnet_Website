@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Transnet</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add your CSS styles here */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            animation: slideImages 12s infinite;
+        }
+
+        .background-slideshow img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+            float: left;
+        }
+
+        @keyframes slideImages {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-25%);
+            }
+            75% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(-75%);
+            }
+        }
+
+        header {
+            background-color: #ff0000;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        form input[type="submit"] {
+            background-color: #ff0000;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
+    <script>
+        function registerUser() {
+            var emailInput = document.getElementById("email");
+            var passwordInput = document.getElementById("password");
+            var confirmPasswordInput = document.getElementById("confirmPassword");
+
+            var email = emailInput.value;
+            var password = passwordInput.value;
+            var confirmPassword = confirmPasswordInput.value;
+
+            // Validate email format
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Invalid email format. Please enter a valid email address.");
+                return;
+            }
+
+            // Check if the password and confirm password match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please re-enter your password.");
+                return;
+            }
+
+            var registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+            var isExistingUser = registeredUsers.some(function (user) {
+                return user.email === email;
+            });
+
+            if (isExistingUser) {
+                alert("Email address already exists. Please choose a different email address.");
+            } else {
+                registeredUsers.push({
+                    email: email,
+                    password: password
+                });
+
+                localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+
+                alert("Registration Successful! You can now log in.");
+                window.location.href = "Login.html";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="Images/ban03.png" alt="Background 2">
+        <img src="Images/ban07.png" alt="Background 3">
+        <img src="Images/ban10.png" alt="Background 4">
+        <img src="Images/29.png" alt="Background 1">
+    </div>
+    <header>
+        <h1>Register</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="About_Us.html">About Us</a>
+        <a href="Our_Services.html">Our Services</a>
+        <a href="Contact_Us.html">Contact Us</a>
+        <a href="Join_Us.html">Join Us</a>
+    </nav>
+    <main>
+        <div class="container">
+            <h1>Register</h1>
+            <form onsubmit="registerUser(); return false;">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required autocomplete="off">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>Contact Transnet:</p>
+        <p>Phone: 0800 003 056</p>
+        <p>Email: reportit@ethicshelpdesk.com</p>
+        <p>Visit us at <a href="https://www.transnet.net/Pages/Home.aspx">www.transnet.com</a></p>
+        <p>&copy; 2023 Transnet. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

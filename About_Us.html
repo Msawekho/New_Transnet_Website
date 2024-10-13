@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - Transnet</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            animation: slideImages 12s infinite;
+        }
+
+        .background-slideshow img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+            float: left;
+        }
+
+        @keyframes slideImages {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-25%);
+            }
+            75% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(-75%);
+            }
+        }
+
+        header {
+            background-color: #ff0000;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="Images/ban03.png" alt="Background 2">
+        <img src="Images/ban07.png" alt="Background 3">
+        <img src="Images/ban10.png" alt="Background 4">
+        <img src="Images/29.png" alt="Background 1">
+    </div>
+
+    <header>
+        <h1>About Us - Transnet</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="About_Us.html">About Us</a>
+            <a href="Our_Services.html">Our Services</a>
+            <a href="Contact_Us.html">Contact Us</a>
+            <a href="Join_Us.html">Join Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Our History</h2>
+            <p>Transnet has a rich and storied history that spans several decades. Founded in [year], we have been at the forefront of the transportation and logistics industry, playing a crucial role in the economic development of our region.</p>
+            <p>Over the years, we have expanded our operations, invested in cutting-edge technology, and forged strategic partnerships to better serve our customers and stakeholders.</p>
+            
+            <h2>Our Mission</h2>
+            <p>At Transnet, our mission is to connect people, goods, and businesses through world-class logistics and transportation solutions. We are committed to excellence, sustainability, and innovation in everything we do.</p>
+            
+            <h2>Our Values</h2>
+            <ul>
+                <li>Customer-Centricity</li>
+                <li>Integrity and Transparency</li>
+                <li>Innovation and Continuous Improvement</li>
+                <li>Safety and Sustainability</li>
+                <li>Teamwork and Collaboration</li>
+            </ul>
+            
+            <h2>Key Personnel</h2>
+            <p>Meet the key leaders who drive Transnet's success:</p>
+            <ul>
+                <li>CEO: [Name]</li>
+                <li>COO: [Name]</li>
+                <li>CFO: [Name]</li>
+                <!-- Add more key personnel as needed -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Contact Transnet:</p>
+        <p>Phone: 0800 003 056</p>
+        <p>Email: reportit@ethicshelpdesk.com</p>
+        <p>Visit us at <a href="https://www.transnet.net/Pages/Home.aspx">www.transnet.com</a></p>
+        <p>&copy; 2023 Transnet. All rights reserved.</p>
+    </footer>
+</body>
+</html>

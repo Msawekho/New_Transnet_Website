@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shipments - Transnet</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 400%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            animation: slideImages 12s infinite;
+        }
+
+        .background-slideshow img {
+            width: 25%;
+            height: 100%;
+            object-fit: cover;
+            float: left;
+        }
+
+        @keyframes slideImages {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-25%);
+            }
+            75% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(-75%);
+            }
+        }
+
+        header {
+            background-color: #ff0000;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            font-size: 36px;
+        }
+
+        nav {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 20px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="background-slideshow">
+        <img src="Images/ban03.png" alt="Background 2">
+        <img src="Images/ban07.png" alt="Background 3">
+        <img src="Images/ban10.png" alt="Background 4">
+        <img src="Images/29.png" alt="Background 1">
+    </div>
+    <header>
+        <h1>All About Shipments</h1>
+    </header>
+    <nav>
+       <nav>
+        <a href="Add_Shipment.html">Add Shipment</a>
+        <a href="Edit_Shipment.html">Edit Shipment</a>
+        <a href="Track_Shipment.html">Track Shipment</a>
+    </nav>
+    </nav>
+    <main>
+        <section id="shipmentSection" style="background-color: #f0f0f0; color: #333;">
+            <h1>​​​​​​​​​​​​​Transnet is the largest and most crucial part of the freight logistics chain that delivers goods to each and every South African.</h1>
+
+            <p>As the custodian of ports, rail and pipelines, Transnet’s objective is to ensure a globally competitive freight system that enables sustained growth and diversification of the country’s economy.
+
+
+<ul>
+<li> Transnet SOC Ltd is a public company (constituted in terms of the Legal Succession Act of 1989), with the South African Government as the sole shareholder.</li>
+
+<li>Transnet owns South Africa's railway, ports and pipelines infrastructure.</li>
+
+<li>The Company's Memorandum of Incorporation (MOI) – approved by the Shareholder Minister on 25 June 2013 – aligns with the provisions of the PFMA, the Companies Act and the National Ports Act, No 12 of 2005, as amended (the National Ports Act).</li>
+
+<li>As a State-owned Company (SOC), the PFMA serves as Transnet's primary legislation.</li>
+
+<li>Transnet signs an annual Shareholder's Compact with the Government of the Republic of South Africa, represented by the Minister of Public Enterprises (DPE). The Shareholder's Compact mandates the Company to deliver on numerous strategic deliverables, including sustainable economic, social and environmental outcomes.</li>
+
+<li>The DPE is the Shareholder representative for Government and is mandated by the Executive to oversee a number of SOCs that operate in core sectors of the economy like mining, defence, energy, logistics and others.</li>
+
+<li>The DPE's strategy has been developed in the context of the National Development Plan (NDP), the Medium-Term Strategic Framework and in response to internal and external environmental drivers Of necessity, the DPE's strategy recognises the challenging and complex prevailing macro-environment and the attendant challenge of choosing where best to allocate scarce resources for maximum effect.</li>
+
+<h2>Transnet has aligned its Growth and Renewal Strategy with the Shareholder's SSI, which mandates Transnet to deliver on the following macro strategic outcomes:</h2>
+
+<li>Reduce the total cost of logistics as a percentage of transportable GDP</li>
+
+<li>Effect and accelerate the modal shift by maximising the role of rail in the national transport task</li>
+
+<li>Integrate South Africa with the region and the rest of the world</li>
+
+<li>Optimise the social and economic impact of all interventions undertaken by the SOC in the achievement of these objectives</li>
+
+<li>Leverage the private sector in the provision of both infrastructure and operations, where required</li></ul><!-- comment --></p>
+        </section>
+    </main>
+    <footer>
+        <p>Contact Transnet:</p>
+        <p>Phone: 0800 003 056</p>
+        <p>Email: reportit@ethicshelpdesk.com</p>
+        <p>Visit us at <a href="https://www.transnet.net/Pages/Home.aspx">www.transnet.com</a></p>
+        <p>&copy; 2023 Transnet. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Example JavaScript code to fetch and display hypothetical shipment information
+        window.onload = function () {
+            // Hypothetical API endpoint for Transnet shipments
+            const apiUrl = 'https://api.transnet.com/shipments';
+
+            // Fetch data from the API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Update the HTML content with shipment information
+                    const shipmentSection = document.getElementById('shipmentSection');
+                    shipmentSection.innerHTML = `
+                        <h2>Shipment Information</h2>
+                        <p>Latest shipment details:</p>
+                        <ul>
+                            <li>Shipment ID: ${data.shipmentId}</li>
+                            <li>Origin: ${data.origin}</li>
+                            <li>Destination: ${data.destination}</li>
+                            <!-- Add more details as needed -->
+                        </ul>
+                    `;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        };
+    </script>
+</body>
+</html>
